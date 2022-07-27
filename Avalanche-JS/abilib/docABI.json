@@ -1,0 +1,147 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_documentId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_authorName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_timeStamp",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_ipfsLink",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_checksum",
+				"type": "string"
+			},
+			{
+				"internalType": "address[]",
+				"name": "_reviewers",
+				"type": "address[]"
+			},
+			{
+				"internalType": "address",
+				"name": "_logicContractAddress",
+				"type": "address"
+			}
+		],
+		"name": "_createDocument",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "_readDocument",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "_documentId",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_authorName",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_timeStamp",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_ipfsLink",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_checksum",
+				"type": "string"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_reviewer",
+				"type": "address"
+			},
+			{
+				"internalType": "int8",
+				"name": "_ranking",
+				"type": "int8"
+			}
+		],
+		"name": "addReview",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "logicContract",
+		"outputs": [
+			{
+				"internalType": "contract LogicContract",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_reviewer",
+				"type": "address"
+			}
+		],
+		"name": "readReview",
+		"outputs": [
+			{
+				"internalType": "int8",
+				"name": "_reviewRank",
+				"type": "int8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "reviewerRanking",
+		"outputs": [
+			{
+				"internalType": "int8",
+				"name": "",
+				"type": "int8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]

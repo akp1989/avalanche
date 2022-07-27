@@ -1,0 +1,95 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_reviewer",
+				"type": "address"
+			},
+			{
+				"internalType": "int8",
+				"name": "_newRank",
+				"type": "int8"
+			},
+			{
+				"internalType": "int8",
+				"name": "_currentRank",
+				"type": "int8"
+			}
+		],
+		"name": "_addReview",
+		"outputs": [
+			{
+				"internalType": "int8",
+				"name": "_reviewRank",
+				"type": "int8"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_reviewer",
+				"type": "address"
+			}
+		],
+		"name": "_addReviewer",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_reviewerAddress",
+				"type": "address"
+			}
+		],
+		"name": "_isValidReviewer",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "validReviewer",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "_reviewer",
+				"type": "address"
+			}
+		],
+		"name": "_removeReviewer",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "isReviewer",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]

@@ -1,0 +1,415 @@
+To install avalanche-cli
+
+curl -sSfL https://raw.githubusercontent.com/ava-labs/avalanche-cli/main/scripts/install.sh | sh -s -- -b avalanchecli
+
+
+Install Avalanche subnet cli
+git clone https://github.com/ava-labs/subnet-cli.git;
+cd subnet-cli;
+go install -v .;
+
+The binary will be available under $GOPATH/binary
+Create a folder and put the private key of the Fuji account.
+
+Install subnet evm
+
+git clone https://github.com/ava-labs/subnet-evm.git
+cd subnet-evm
+
+
+
+******************************************************************** To add the subnet on Fujinet ******************************************************************
+
+
+------------------------------------------------------------------------------ Step1 ------------------------------------------------------------------------------
+1) Generate a subnet id using subnet-cli
+./subnet-cli create VMID <fcatsubnet>
+
+Returns a VMID for the subnet n6NRKNa8oPXXAdGHaubZHLo3ga2owqRep79eoDpm5C5NCFiMj from fcatsubnet
+
+
+------------------------------------------------------------------------------ Step2 ------------------------------------------------------------------------------
+2) Build a subnet-evm using the generated VMID
+./scripts/build.sh build/n6NRKNa8oPXXAdGHaubZHLo3ga2owqRep79eoDpm5C5NCFiMj
+Move the built executable to the plugins inside the Avalanchego folder
+
+
+------------------------------------------------------------------------------ Step3 ------------------------------------------------------------------------------
+3) Create a subnet
+
+./subnet-cli create subnet \
+--private-key-path=.subnet-cli.pk \
+--public-uri=http://127.0.0.1/9651
+
+Returns a subnet ID : 238ytDRPSm6EHerLaDEE5veFjMFpgQeiAuz98zKCF1CJPafE3A
+
+2022-07-27T09:01:37.895+0100	info	client/client.go:81	fetching X-Chain id
+2022-07-27T09:01:38.451+0100	info	client/client.go:87	fetched X-Chain id	{"id": "2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm"}
+2022-07-27T09:01:38.451+0100	info	client/client.go:96	fetching AVAX asset id	{"uri": "https://api.avax-test.network"}
+2022-07-27T09:01:38.478+0100	info	client/client.go:105	fetched AVAX asset id	{"id": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"}
+2022-07-27T09:01:38.478+0100	info	client/client.go:107	fetching network information
+2022-07-27T09:01:38.503+0100	info	client/client.go:116	fetched network information	{"networkId": 5, "networkName": "fuji"}
+2022-07-27T09:01:38.756+0100	info	client/p.go:131	creating subnet	{"dryMode": true, "assetId": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK", "createSubnetTxFee": 100000000}
+
+Ready to create subnet resources, should we continue?
+*-------------------------*----------------------------------------------------*
+| PRIMARY P-CHAIN ADDRESS | P-fuji143kh3gw8rxpwscwneqzd96e7arxrtegunlyfyz      |
+*-------------------------*----------------------------------------------------*
+| TOTAL P-CHAIN BALANCE   | 0.7930801 $AVAX                                    |
+*-------------------------*----------------------------------------------------*
+| TX FEE                  | 0.100 $AVAX                                        |
+*-------------------------*----------------------------------------------------*
+| URI                     | https://api.avax-test.network                      |
+*-------------------------*----------------------------------------------------*
+| NETWORK NAME            | fuji                                               |
+*-------------------------*----------------------------------------------------*
+| EXPECTED SUBNET ID      | 238ytDRPSm6EHerLaDEE5veFjMFpgQeiAuz98zKCF1CJPafE3A |
+*-------------------------*----------------------------------------------------*
+✔ Yes, let's create! I agree to pay the fee!
+
+
+
+2022-07-27T09:02:04.505+0100	info	client/p.go:131	creating subnet	{"dryMode": false, "assetId": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK", "createSubnetTxFee": 100000000}
+2022-07-27T09:02:04.774+0100	info	platformvm/checker.go:74	polling subnet	{"subnetId": "238ytDRPSm6EHerLaDEE5veFjMFpgQeiAuz98zKCF1CJPafE3A"}
+2022-07-27T09:02:04.776+0100	info	platformvm/checker.go:48	polling P-Chain tx	{"txId": "238ytDRPSm6EHerLaDEE5veFjMFpgQeiAuz98zKCF1CJPafE3A", "expectedStatus": "Committed"}
+2022-07-27T09:02:04.776+0100	info	poll/poll.go:42	start polling	{"internal": "1s"}
+2022-07-27T09:02:06.917+0100	info	poll/poll.go:66	poll confirmed	{"took": "2.141263521s"}
+2022-07-27T09:02:06.917+0100	info	platformvm/checker.go:88	finding subnets	{"subnetId": "238ytDRPSm6EHerLaDEE5veFjMFpgQeiAuz98zKCF1CJPafE3A"}
+2022-07-27T09:02:06.917+0100	info	poll/poll.go:42	start polling	{"internal": "1s"}
+2022-07-27T09:02:07.052+0100	info	poll/poll.go:66	poll confirmed	{"took": "134.448224ms"}
+created subnet "238ytDRPSm6EHerLaDEE5veFjMFpgQeiAuz98zKCF1CJPafE3A" (took 2.275711745s)
+(subnet must be whitelisted beforehand via --whitelisted-subnets flag!)
+
+*-------------------------*----------------------------------------------------*
+| PRIMARY P-CHAIN ADDRESS | P-fuji143kh3gw8rxpwscwneqzd96e7arxrtegunlyfyz      |
+*-------------------------*----------------------------------------------------*
+| TOTAL P-CHAIN BALANCE   | 0.6930801 $AVAX                                    |
+*-------------------------*----------------------------------------------------*
+| URI                     | https://api.avax-test.network                      |
+*-------------------------*----------------------------------------------------*
+| NETWORK NAME            | fuji                                               |
+*-------------------------*----------------------------------------------------*
+| CREATED SUBNET ID       | 238ytDRPSm6EHerLaDEE5veFjMFpgQeiAuz98zKCF1CJPafE3A |
+*-------------------------*----------------------------------------------------*
+
+
+------------------------------------------------------------------------------ Step4 ------------------------------------------------------------------------------
+4) Add validator - ( To be done once. This adds the node as a validator on the avalanche network)
+./subnet-cli add validator \
+--private-key-path=.subnet-cli.pk \
+--public-uri=https://api.avax-test.network \
+--node-ids="NodeID-LXqJZMYU1QEmPVc8GUKKXoTD9bhURs4WP" \
+--stake-amount=2000000000000 \
+--validate-reward-fee-percent=3
+
+2022-07-27T09:09:13.027+0100	info	client/client.go:81	fetching X-Chain id
+2022-07-27T09:09:13.148+0100	info	client/client.go:87	fetched X-Chain id	{"id": "2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm"}
+2022-07-27T09:09:13.148+0100	info	client/client.go:96	fetching AVAX asset id	{"uri": "https://api.avax-test.network"}
+2022-07-27T09:09:13.176+0100	info	client/client.go:105	fetched AVAX asset id	{"id": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"}
+2022-07-27T09:09:13.177+0100	info	client/client.go:107	fetching network information
+2022-07-27T09:09:13.205+0100	info	client/client.go:116	fetched network information	{"networkId": 5, "networkName": "fuji"}
+
+LXqJZMYU1QEmPVc8GUKKXoTD9bhURs4WP is already a validator on 11111111111111111111111111111111LpoYY
+no primary network validators to add
+
+------------------------------------------------------------------------------ Step5 ------------------------------------------------------------------------------
+5) Add a subnet validator
+./subnet-cli add subnet-validator \
+--private-key-path=.subnet-cli.pk \
+--public-uri=https://api.avax-test.network \
+--node-ids="NodeID-LXqJZMYU1QEmPVc8GUKKXoTD9bhURs4WP" \
+--subnet-id="238ytDRPSm6EHerLaDEE5veFjMFpgQeiAuz98zKCF1CJPafE3A"
+
+Wait for the local node to validate the subnet
+2022-07-27T09:10:11.821+0100	info	client/client.go:81	fetching X-Chain id
+2022-07-27T09:10:11.894+0100	info	client/client.go:87	fetched X-Chain id	{"id": "2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm"}
+2022-07-27T09:10:11.894+0100	info	client/client.go:96	fetching AVAX asset id	{"uri": "https://api.avax-test.network"}
+2022-07-27T09:10:11.921+0100	info	client/client.go:105	fetched AVAX asset id	{"id": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"}
+2022-07-27T09:10:11.921+0100	info	client/client.go:107	fetching network information
+2022-07-27T09:10:11.962+0100	info	client/client.go:116	fetched network information	{"networkId": 5, "networkName": "fuji"}
+Ready to add subnet validator, should we continue?
+*-------------------------*----------------------------------------------------*
+| PRIMARY P-CHAIN ADDRESS | P-fuji143kh3gw8rxpwscwneqzd96e7arxrtegunlyfyz      |
+*-------------------------*----------------------------------------------------*
+| TOTAL P-CHAIN BALANCE   | 0.6930801 $AVAX                                    |
+*-------------------------*----------------------------------------------------*
+| TX FEE                  | 0.001 $AVAX                                        |
+*-------------------------*----------------------------------------------------*
+| REQUIRED BALANCE        | 0.001 $AVAX                                        |
+*-------------------------*----------------------------------------------------*
+| URI                     | https://api.avax-test.network                      |
+*-------------------------*----------------------------------------------------*
+| NETWORK NAME            | fuji                                               |
+*-------------------------*----------------------------------------------------*
+| NODE IDs                | [LXqJZMYU1QEmPVc8GUKKXoTD9bhURs4WP]                |
+*-------------------------*----------------------------------------------------*
+| SUBNET ID               | 238ytDRPSm6EHerLaDEE5veFjMFpgQeiAuz98zKCF1CJPafE3A |
+*-------------------------*----------------------------------------------------*
+| VALIDATE WEIGHT         | 1,000                                              |
+*-------------------------*----------------------------------------------------*
+✔ Yes, let's create! I agree to pay the fee!
+
+
+
+2022-07-27T09:10:32.861+0100	info	client/p.go:299	adding subnet validator	{"subnetId": "238ytDRPSm6EHerLaDEE5veFjMFpgQeiAuz98zKCF1CJPafE3A", "txFee": 1000000, "start": "2022-07-27T09:11:02.783+0100", "end": "2023-05-22T22:02:53.000+0100", "weight": 1000}
+2022-07-27T09:10:33.291+0100	info	platformvm/checker.go:48	polling P-Chain tx	{"txId": "2EUWZ3T9YhtVK4eEUqCdaDCB93AYHHvQCMyPscoFH4SwkFgQQj", "expectedStatus": "Committed"}
+2022-07-27T09:10:33.291+0100	info	poll/poll.go:42	start polling	{"internal": "1s"}
+2022-07-27T09:10:34.433+0100	info	poll/poll.go:66	poll confirmed	{"took": "1.142278949s"}
+added LXqJZMYU1QEmPVc8GUKKXoTD9bhURs4WP to subnet 238ytDRPSm6EHerLaDEE5veFjMFpgQeiAuz98zKCF1CJPafE3A validator set (took 1.142278949s)
+
+waiting for validator LXqJZMYU1QEmPVc8GUKKXoTD9bhURs4WP to start validating 238ytDRPSm6EHerLaDEE5veFjMFpgQeiAuz98zKCF1CJPafE3A...(could take a few minutes)
+*-------------------------*----------------------------------------------------*
+| PRIMARY P-CHAIN ADDRESS | P-fuji143kh3gw8rxpwscwneqzd96e7arxrtegunlyfyz      |
+*-------------------------*----------------------------------------------------*
+| TOTAL P-CHAIN BALANCE   | 0.6920801 $AVAX                                    |
+*-------------------------*----------------------------------------------------*
+| URI                     | https://api.avax-test.network                      |
+*-------------------------*----------------------------------------------------*
+| NETWORK NAME            | fuji                                               |
+*-------------------------*----------------------------------------------------*
+| NODE IDs                | [LXqJZMYU1QEmPVc8GUKKXoTD9bhURs4WP]                |
+*-------------------------*----------------------------------------------------*
+| SUBNET ID               | 238ytDRPSm6EHerLaDEE5veFjMFpgQeiAuz98zKCF1CJPafE3A |
+*-------------------------*----------------------------------------------------*
+| VALIDATE START          | 2022-07-27T09:11:02+01:00                          |
+*-------------------------*----------------------------------------------------*
+| VALIDATE END            | 2023-05-22T22:02:53+01:00                          |
+*-------------------------*----------------------------------------------------*
+| VALIDATE WEIGHT         | 1,000                                              |
+*-------------------------*----------------------------------------------------*
+
+
+------------------------------------------------------------------------------ Step6 ------------------------------------------------------------------------------
+6) Restart the avalanche node with whitelist parameter
+./build/avalanchego   --network-id fuji \
+  --health-check-frequency 2s \
+  --log-display-level INFO \
+  --log-level INFO \
+  --whitelisted-subnets=238ytDRPSm6EHerLaDEE5veFjMFpgQeiAuz98zKCF1CJPafE3A
+
+
+------------------------------------------------------------------------------ Step7 ------------------------------------------------------------------------------
+7) Create a chain for the subnet
+./subnet-cli create blockchain \
+--private-key-path=.subnet-cli.pk \
+--public-uri=https://api.avax-test.network \
+--subnet-id="238ytDRPSm6EHerLaDEE5veFjMFpgQeiAuz98zKCF1CJPafE3A" \
+--chain-name=fcatsubnet \
+--vm-id=n6NRKNa8oPXXAdGHaubZHLo3ga2owqRep79eoDpm5C5NCFiMj \
+--vm-genesis-path=fcatsubnet.json
+2022-07-27T09:43:31.408+0100	info	client/client.go:81	fetching X-Chain id
+2022-07-27T09:43:31.495+0100	info	client/client.go:87	fetched X-Chain id	{"id": "2JVSBoinj9C2J33VntvzYtVJNZdN2NKiwwKjcumHUWEb5DbBrm"}
+2022-07-27T09:43:31.495+0100	info	client/client.go:96	fetching AVAX asset id	{"uri": "https://api.avax-test.network"}
+2022-07-27T09:43:31.524+0100	info	client/client.go:105	fetched AVAX asset id	{"id": "U8iRqJoiJm8xZHAacmvYyZVwqQx6uDNtQeP3CQ6fcgQk3JqnK"}
+2022-07-27T09:43:31.524+0100	info	client/client.go:107	fetching network information
+2022-07-27T09:43:31.550+0100	info	client/client.go:116	fetched network information	{"networkId": 5, "networkName": "fuji"}
+
+Ready to create blockchain resources, should we continue?
+*-------------------------*----------------------------------------------------*
+| PRIMARY P-CHAIN ADDRESS | P-fuji143kh3gw8rxpwscwneqzd96e7arxrtegunlyfyz      |
+*-------------------------*----------------------------------------------------*
+| TOTAL P-CHAIN BALANCE   | 0.6920801 $AVAX                                    |
+*-------------------------*----------------------------------------------------*
+| TX FEE                  | 0.100 $AVAX                                        |
+*-------------------------*----------------------------------------------------*
+| REQUIRED BALANCE        | 0.100 $AVAX                                        |
+*-------------------------*----------------------------------------------------*
+| URI                     | https://api.avax-test.network                      |
+*-------------------------*----------------------------------------------------*
+| NETWORK NAME            | fuji                                               |
+*-------------------------*----------------------------------------------------*
+| SUBNET ID               | 238ytDRPSm6EHerLaDEE5veFjMFpgQeiAuz98zKCF1CJPafE3A |
+*-------------------------*----------------------------------------------------*
+| CHAIN NAME              | fcatsubnet                                         |
+*-------------------------*----------------------------------------------------*
+| VM ID                   | n6NRKNa8oPXXAdGHaubZHLo3ga2owqRep79eoDpm5C5NCFiMj  |
+*-------------------------*----------------------------------------------------*
+| VM GENESIS PATH         | fcatsubnet.json                                    |
+*-------------------------*----------------------------------------------------*
+✔ Yes, let's create! I agree to pay the fee!
+
+
+
+2022-07-27T09:43:42.963+0100	info	client/p.go:497	creating blockchain	{"subnetId": "238ytDRPSm6EHerLaDEE5veFjMFpgQeiAuz98zKCF1CJPafE3A", "chainName": "fcatsubnet", "vmId": "n6NRKNa8oPXXAdGHaubZHLo3ga2owqRep79eoDpm5C5NCFiMj", "createBlockchainTxFee": 100000000}
+created blockchain "acpS4SbcW5f2mz8mnh1MtJyXaBrZZuQtqriK8CePJvj9knVKe" (took 311.807134ms)
+
+*-------------------------*----------------------------------------------------*
+| PRIMARY P-CHAIN ADDRESS | P-fuji143kh3gw8rxpwscwneqzd96e7arxrtegunlyfyz      |
+*-------------------------*----------------------------------------------------*
+| TOTAL P-CHAIN BALANCE   | 0.6920801 $AVAX                                    |
+*-------------------------*----------------------------------------------------*
+| URI                     | https://api.avax-test.network                      |
+*-------------------------*----------------------------------------------------*
+| NETWORK NAME            | fuji                                               |
+*-------------------------*----------------------------------------------------*
+| SUBNET ID               | 238ytDRPSm6EHerLaDEE5veFjMFpgQeiAuz98zKCF1CJPafE3A |
+*-------------------------*----------------------------------------------------*
+| CREATED BLOCKCHAIN ID   | acpS4SbcW5f2mz8mnh1MtJyXaBrZZuQtqriK8CePJvj9knVKe  |
+*-------------------------*----------------------------------------------------*
+| CHAIN NAME              | fcatsubnet                                         |
+*-------------------------*----------------------------------------------------*
+| VM ID                   | n6NRKNa8oPXXAdGHaubZHLo3ga2owqRep79eoDpm5C5NCFiMj  |
+*-------------------------*----------------------------------------------------*
+| VM GENESIS PATH         | fcatsubnet.json                                    |
+*-------------------------*----------------------------------------------------*
+
+
+Add the subnet to metamask 
+
+Network Name: FCATSubnet.
+New RPC URL: This must be the RPC URL of our node. In this case it is http://127.0.0.1:9650/ext/bc/acpS4SbcW5f2mz8mnh1MtJyXaBrZZuQtqriK8CePJvj9knVKe/rpc
+acpS4SbcW5f2mz8mnh1MtJyXaBrZZuQtqriK8CePJvj9knVKe in our case
+Chain ID: The Chain ID specified in genesis. In this case 30389.
+Currency Symbol: FCAT
+
+
+
+
+
+
+
+
+******************************************************************************************************************************************************
+                            Local version of subnet
+
+******************************************************************************************************************************************************
+1) Generate a subnet id using subnet-cli
+./subnet-cli create VMID <fcatsubnet>
+
+Returns a VMID for the subnet pkq6wx455iKNnwDUCqxCHQbnF243UUcH9dZcVWc249cF6zuyX   
+
+ 
+2) Build a subnet-evm using the generated VMID
+./scripts/build.sh build/pkq6wx455iKNnwDUCqxCHQbnF243UUcH9dZcVWc249cF6zuyX
+Move the built executable to the plugins inside the Avalanchego folder
+ 
+3) Create a subnet
+
+./subnet-cli create subnet \
+--private-key-path=.subnet-cli-local.pk \
+--public-uri=http://127.0.0.1:9611
+
+Returns a subnet ID : 29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL
+
+Copy the binary from step two into the ./build/plugin folder of avalanchego and restart all the nodes
+Additional params to be added while starting 
+--health-check-frequency 2s --log-display-level INFO --log-level INFO --whitelisted-subnets=29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL
+
+
+4) Add validator
+./subnet-cli add validator \
+--private-key-path=.subnet-cli-local.pk \
+--public-uri=http://localhost:9611 \
+--node-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg" \
+--stake-amount=2000000000000 \
+--validate-reward-fee-percent=3
+
+./subnet-cli add validator \
+--private-key-path=.subnet-cli-local.pk \
+--public-uri=http://localhost:9621 \
+--node-ids="NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ" \
+--stake-amount=2000000000000 \
+--validate-reward-fee-percent=3
+
+./subnet-cli add validator \
+--private-key-path=.subnet-cli-local.pk \
+--public-uri=http://localhost:9631 \
+--node-ids="NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN" \
+--stake-amount=2000000000000 \
+--validate-reward-fee-percent=3
+
+./subnet-cli add validator \
+--private-key-path=.subnet-cli-local.pk \
+--public-uri=http://localhost:9641 \
+--node-ids="NodeID-GWPcbFJZFfZreETSoWjPimr846mXEKCtu" \
+--stake-amount=2000000000000 \
+--validate-reward-fee-percent=3
+
+./subnet-cli add validator \
+--private-key-path=.subnet-cli-local.pk \
+--public-uri=http://localhost:9641 \
+--node-ids="NodeID-GWPcbFJZFfZreETSoWjPimr846mXEKCtu" \
+--stake-amount=2000000000000 \
+--validate-reward-fee-percent=3
+
+5) Add subnet validator
+
+./subnet-cli add subnet-validator \
+--private-key-path=.subnet-cli-local.pk \
+--public-uri=http://localhost:9611 \
+--node-ids="NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg" \
+--subnet-id="29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL"
+
+./subnet-cli add subnet-validator \
+--private-key-path=.subnet-cli-local.pk \
+--public-uri=http://localhost:9621 \
+--node-ids="NodeID-MFrZFVCXPv5iCn6M9K6XduxGTYp891xXZ" \
+--subnet-id="29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL"
+
+./subnet-cli add subnet-validator \
+--private-key-path=.subnet-cli-local.pk \
+--public-uri=http://localhost:9631 \
+--node-ids="NodeID-NFBbbJ4qCmNaCzeW7sxErhvWqvEQMnYcN" \
+--subnet-id="29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL"
+
+6) Create a chain
+
+./subnet-cli create blockchain \
+--private-key-path=.subnet-cli-local.pk \
+--public-uri=http://localhost:9611 \
+--subnet-id="29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL" \
+--chain-name=localsubnet \
+--vm-id=pkq6wx455iKNnwDUCqxCHQbnF243UUcH9dZcVWc249cF6zuyX \
+--vm-genesis-path=localsubnet.json
+
+
+*-------------------------*----------------------------------------------------*
+| PRIMARY P-CHAIN ADDRESS | P-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u     |
+*-------------------------*----------------------------------------------------*
+| TOTAL P-CHAIN BALANCE   | 29,999,999.8970000 $AVAX                           |
+*-------------------------*----------------------------------------------------*
+| URI                     | http://localhost:9611                              |
+*-------------------------*----------------------------------------------------*
+| NETWORK NAME            | local                                              |
+*-------------------------*----------------------------------------------------*
+| SUBNET ID               | 29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL |
+*-------------------------*----------------------------------------------------*
+| CREATED BLOCKCHAIN ID   | 2eQ5vLqssgbgQesWWxT4Aa1zuz5K8ur4WYnyzTR3niY2E1oGLo |
+*-------------------------*----------------------------------------------------*
+| CHAIN NAME              | localsubnet                                        |
+*-------------------------*----------------------------------------------------*
+| VM ID                   | pkq6wx455iKNnwDUCqxCHQbnF243UUcH9dZcVWc249cF6zuyX  |
+*-------------------------*----------------------------------------------------*
+| VM GENESIS PATH         | localsubnet.json                                   |
+*-------------------------*----------------------------------------------------*
+
+
+*-------------------------*----------------------------------------------------*
+| PRIMARY P-CHAIN ADDRESS | P-local18jma8ppw3nhx5r4ap8clazz0dps7rv5u00z96u     |
+*-------------------------*----------------------------------------------------*
+| TOTAL P-CHAIN BALANCE   | 29,999,999.7970000 $AVAX                           |
+*-------------------------*----------------------------------------------------*
+| URI                     | http://localhost:9611                              |
+*-------------------------*----------------------------------------------------*
+| NETWORK NAME            | local                                              |
+*-------------------------*----------------------------------------------------*
+| SUBNET ID               | 29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL |
+*-------------------------*----------------------------------------------------*
+| CREATED BLOCKCHAIN ID   | 2UXEq9pZFJFfeZGeLYzR2aqm9eirVKuM6ALmw94pT8qe6g48u  |
+*-------------------------*----------------------------------------------------*
+| CHAIN NAME              | localsubnet                                        |
+*-------------------------*----------------------------------------------------*
+| VM ID                   | pkq6wx455iKNnwDUCqxCHQbnF243UUcH9dZcVWc249cF6zuyX  |
+*-------------------------*----------------------------------------------------*
+| VM GENESIS PATH         | localsubnet.json                                   |
+*-------------------------*----------------------------------------------------*
+Network Name: LocalSubnet.
+New RPC URL: This must be the RPC URL of our node. In this case it is http://127.0.0.1:9611/ext/bc/2eQ5vLqssgbgQesWWxT4Aa1zuz5K8ur4WYnyzTR3niY2E1oGLo/rpc
+2eQ5vLqssgbgQesWWxT4Aa1zuz5K8ur4WYnyzTR3niY2E1oGLo in our case
+Chain ID: The Chain ID specified in genesis. In this case 10001.
+Currency Symbol: FCAT
+
+
+Document Contract : 0x282e06238E025652BDfa5ABc9E0e72647004E398
+Logic Contract : 0x1b2BBB6aE22145AB73a1C5a2851e4983F259dD15
+MDC : 0xFC01a763ef0af935db343d2C1ADedC0591C56012

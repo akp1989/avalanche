@@ -1,0 +1,12 @@
+Set up of Fuji testnet on Metamask
+
+Network Name: Avalanche FUJI C-Chain
+New RPC URL: https://api.avax-test.network/ext/bc/C/rpc
+ChainID: 43113
+Symbol: AVAX
+Explorer: https://testnet.snowtrace.io/
+
+
+Use the script fujiSetup to generate a mnemonic and create accounts/keys.
+
+

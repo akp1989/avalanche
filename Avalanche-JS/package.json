@@ -1,0 +1,16 @@
+{
+  "name": "avalanche",
+  "version": "1.0.0",
+  "description": "Avalanche Scripts",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "avalanche": "^3.15.3",
+    "ethers": "^5.6.9",
+    "randombytes": "^2.1.0"
+  }
+}

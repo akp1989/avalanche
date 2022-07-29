@@ -33,6 +33,8 @@ To start avalanche network with three nodes(max of 5 nodes supported the staking
 
 /**** network-id = mainnet/fuji to connect to the main net or testnet ***/
 
+/***********Node1***************/
+
 ./build/avalanchego \
 --public-ip=127.0.0.1 \
 --http-port=9611 \
@@ -40,7 +42,14 @@ To start avalanche network with three nodes(max of 5 nodes supported the staking
 --db-dir=db/node1 \
 --network-id=local \
 --staking-tls-cert-file=/Users/prabhakaran/workspace/go/src/avalanchego/staking/local/staker1.crt \
---staking-tls-key-file=/Users/prabhakaran/workspace/go/src/avalanchego/staking/local/staker1.key
+--staking-tls-key-file=/Users/prabhakaran/workspace/go/src/avalanchego/staking/local/staker1.key \
+--health-check-frequency 2s \
+--log-display-level INFO \
+--log-level INFO \
+--whitelisted-subnets=29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL
+
+
+/***********Node2***************/
 
 ./build/avalanchego \
 --public-ip=127.0.0.1 \
@@ -51,7 +60,13 @@ To start avalanche network with three nodes(max of 5 nodes supported the staking
 --bootstrap-ips=127.0.0.1:9612 \
 --bootstrap-ids=NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg \
 --staking-tls-cert-file=/Users/prabhakaran/workspace/go/src/avalanchego/staking/local/staker2.crt \
---staking-tls-key-file=/Users/prabhakaran/workspace/go/src/avalanchego/staking/local/staker2.key
+--staking-tls-key-file=/Users/prabhakaran/workspace/go/src/avalanchego/staking/local/staker2.key \
+--health-check-frequency 2s \
+--log-display-level INFO \
+--log-level INFO \
+--whitelisted-subnets=29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL
+
+/***********Node3***************/
 
 ./build/avalanchego \
 --public-ip=127.0.0.1 \
@@ -62,7 +77,14 @@ To start avalanche network with three nodes(max of 5 nodes supported the staking
 --bootstrap-ips=127.0.0.1:9612 \
 --bootstrap-ids=NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg \
 --staking-tls-cert-file=/Users/prabhakaran/workspace/go/src/avalanchego/staking/local/staker3.crt \
---staking-tls-key-file=/Users/prabhakaran/workspace/go/src/avalanchego/staking/local/staker3.key
+--staking-tls-key-file=/Users/prabhakaran/workspace/go/src/avalanchego/staking/local/staker3.key \
+--health-check-frequency 2s \
+--log-display-level INFO \
+--log-level INFO \
+--whitelisted-subnets=29uVeLPJB1eQJkzRemU8g8wZDw5uJRqpab5U2mX9euieVwiEbL
+
+
+/***********Node4***************/
 
 ./build/avalanchego \
 --public-ip=127.0.0.1 \
@@ -73,7 +95,12 @@ To start avalanche network with three nodes(max of 5 nodes supported the staking
 --bootstrap-ips=127.0.0.1:9612 \
 --bootstrap-ids=NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg \
 --staking-tls-cert-file=/Users/prabhakaran/workspace/go/src/avalanchego/staking/local/staker4.crt \
---staking-tls-key-file=/Users/prabhakaran/workspace/go/src/avalanchego/staking/local/staker4.key
+--staking-tls-key-file=/Users/prabhakaran/workspace/go/src/avalanchego/staking/local/staker4.key \
+--health-check-frequency 2s \
+--log-display-level INFO \
+--log-level INFO
+ 
+/***********Node5***************/
 
 ./build/avalanchego \
 --public-ip=127.0.0.1 \
@@ -84,7 +111,11 @@ To start avalanche network with three nodes(max of 5 nodes supported the staking
 --bootstrap-ips=127.0.0.1:9612 \
 --bootstrap-ids=NodeID-7Xhw2mDxuDS44j42TCB6U5579esbSt3Lg \
 --staking-tls-cert-file=/Users/prabhakaran/workspace/go/src/avalanchego/staking/local/staker5.crt \
---staking-tls-key-file=/Users/prabhakaran/workspace/go/src/avalanchego/staking/local/staker5.key
+--staking-tls-key-file=/Users/prabhakaran/workspace/go/src/avalanchego/staking/local/staker5.key \
+--health-check-frequency 2s \
+--log-display-level INFO \
+--log-level INFO
+ 
 
 
 Use the following api to create a user

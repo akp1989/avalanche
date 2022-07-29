@@ -9,4 +9,11 @@ Explorer: https://testnet.snowtrace.io/
 
 Use the script fujiSetup to generate a mnemonic and create accounts/keys.
 
+./build1/avalanchego   --network-id fuji \
+--public-ip=127.0.0.1 \
+--health-check-frequency 2s \
+--log-display-level INFO \
+--log-level INFO \
+--whitelisted-subnets=238ytDRPSm6EHerLaDEE5veFjMFpgQeiAuz98zKCF1CJPafE3A
+
 
